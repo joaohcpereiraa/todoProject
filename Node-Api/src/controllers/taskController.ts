@@ -29,4 +29,49 @@ export default class TaskController implements ITaskController {
         }
     };
 
+    public async listTasks(req: Request, res: Response, next: NextFunction) {
+        try {
+            const tasks = await this.taskServiceInstance.listTasks();
+            return res.status(200).json(tasks);
+        } catch (err) {
+            return next(err);
+        }
+    }
+
+    public async updateTask(req: Request, res: Response, next: NextFunction) {
+        try {
+            const {id} = req.params;
+            const taskOrError = await this.taskServiceInstance.updateTask(id, req.body as ITaskDTO) as Result<ITaskDTO>;
+            
+            if(taskOrError.isFailure){
+                return res.status(400).json({ error: taskOrError.errorValue() });
+            }
+
+            const taskDTO = taskOrError.getValue();
+            return res.status(200).json(taskDTO);
+
+        } catch (err) {
+           console.error("Error updating task", err);
+              return next(err);
+        }
+    }
+
+    public async removeTask(req: Request, res: Response, next: NextFunction) {
+        try {
+            const {id} = req.params;
+            const taskOrError = await this.taskServiceInstance.removeTask(id);
+            
+            if(taskOrError.isFailure){
+                return res.status(400).json({ error: taskOrError.errorValue() });
+            }
+
+            const taskDTO = taskOrError.getValue();
+            return res.status(200).json(taskDTO);
+
+        } catch (err) {
+           console.error("Error removing task", err);
+              return next(err);
+        }
+    }
+
 }

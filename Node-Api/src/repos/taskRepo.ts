@@ -51,6 +51,31 @@ export default class TaskRepo implements ITaskRepo {
             throw err;
         }
     }
+
+    public async findAll (): Promise<Task[]> {
+        const query = {};
+        const taskRecords = await this.taskSchema.find(query as FilterQuery<ITaskPersistence & Document>);
+
+        return taskRecords.map((taskRecord) => TaskMap.toDomain(taskRecord));
+    }
+
+    public async findByTaskId (taskId: TaskId | string): Promise<Task> {
+        const query = { domainId: taskId};
+        const taskRecord = await this.taskSchema.findOne(query as FilterQuery<ITaskPersistence & Document>);
+
+        if(taskRecord != null){
+            return TaskMap.toDomain(taskRecord);
+        } else {
+            return null;
+        }   
+
+    }
+
+
+    public async delete (task: Task): Promise<void> {
+        const query = { domainId: task.id.toString() };
+        await this.taskSchema.deleteOne(query as FilterQuery<ITaskPersistence & Document>);
+    }
 }
 
 

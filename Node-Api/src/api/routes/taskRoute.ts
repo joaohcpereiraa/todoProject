@@ -28,4 +28,51 @@ export default (app: Router) => {
             }
         }
     );
+
+    route.get(
+        '/list',
+        async (req, res, next) => {
+            try {
+                await ctrl.listTasks(req, res, next);
+            } catch (error) {
+                next(error);
+            }
+        }
+    );
+
+    route.put(
+        '/update/:id',
+        celebrate({
+            body: Joi.object({
+                title: Joi.string().optional(),
+                completed: Joi.boolean().optional()
+            }),
+            params: Joi.object({
+                id: Joi.string().required()
+            })
+        }),
+        async (req, res, next) => {
+            try {
+                await ctrl.updateTask(req, res, next);
+            } catch (error) {
+                next(error);
+            }
+        }
+    );
+
+    route.delete(
+        '/remove/:id',
+        celebrate({
+            params: Joi.object({
+                id: Joi.string().required()
+            })
+        }),
+        async (req, res, next) => {
+            try {
+                await ctrl.removeTask(req, res, next);
+            } catch (error) {
+                next(error);
+            }
+        }
+    );
 };
