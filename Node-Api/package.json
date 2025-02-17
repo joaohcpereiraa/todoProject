@@ -1,0 +1,49 @@
+{
+  "name": "bulletproof-nodejs",
+  "version": "1.0.0",
+  "description": "Bulletproof node.js",
+  "main": "src/app.ts",
+  "scripts": {
+    "build": "tsc && echo Build succeeded!",
+    "heroku-postbuild": "npm run build",
+    "start": "nodemon",
+    "inspect": "nodemon --inspect src/app.ts",
+    "test": "cross-env NODE_ENV=test jest",
+    "lint": "npm run lint:js ",
+    "lint:eslint": "eslint --ignore-path .gitignore --ext .ts",
+    "lint:js": "npm run lint:eslint src/",
+    "lint:fix": "npm run lint:js -- --fix"
+  },
+  "keywords": [
+    "nodejs",
+    "typescript",
+    "express",
+    "mongodb",
+    "jest",
+    "winston",
+    "typedi",
+    "celebrate",
+    "cors"
+  ],
+  "dependencies": {
+    "celebrate": "^15.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "method-override": "^3.0.0",
+    "mongodb-memory-server": "^10.1.3",
+    "mongoose": "^8.10.1",
+    "reflect-metadata": "^0.2.2",
+    "typedi": "^0.10.0",
+    "uuid": "^11.0.5",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/jest": "^29.5.14",
+    "@types/winston": "^2.4.4",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}
