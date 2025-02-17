@@ -40,18 +40,18 @@ Make sure you have the following installed on your machine:
 This will start the backend server and the frontend client. The backend server will run on http://localhost:4000 and the frontend client will run on http://localhost:5173.
 
 
-4. Features
-   Add new tasks
-   Edit existing tasks
-   Delete tasks
-   Mark tasks as completed
+4. Features:
+   - Add new tasks
+   - Edit existing tasks
+   - Delete tasks
+   - Mark tasks as completed
    
 5. Technologies Used
    Backend:
-   Node.js
-   Express
-   MongoDB (with Mongoose)
+   - Node.js
+   - Express
+   - MongoDB (with Mongoose)
 
     Frontend:
-	React
-	Vite
+	- React
+	- Vite
